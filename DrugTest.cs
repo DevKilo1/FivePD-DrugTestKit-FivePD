@@ -35,7 +35,7 @@ public class DrugTest : Plugin
     internal DrugTest()
     {
         // Startup
-        Debug.WriteLine("Loaded DrugTest 1.0 by DevKilo");
+        //Debug.WriteLine("Loaded DrugTest 1.0 by DevKilo");
         EventHandlers["FIVEPD::Client::changePedState"] += changePedState;
         // Post-Startup
         CheckForSearch();
@@ -47,7 +47,7 @@ public class DrugTest : Plugin
         foreach (JToken obj in itemsJSON)
         {
             if (obj["isSuspicious"] == null) continue;
-            Debug.WriteLine(obj["isSuspicious"].ToString());
+            //Debug.WriteLine(obj["isSuspicious"].ToString());
             if (obj["name"].ToString() == itemName)
             {
                 result = bool.Parse(obj["isSuspicious"].ToString());
@@ -60,13 +60,13 @@ public class DrugTest : Plugin
     public static JArray JSONRead(string fileName)
     {
         string data = API.LoadResourceFile(API.GetCurrentResourceName(), fileName); // !!Add to files in fxmanifest.lua!!
-        Debug.WriteLine("Data: "+data);
+        //Debug.WriteLine("Data: "+data);
         return JArray.Parse(data);
     }
 
     private void changePedState(string datax)
     {
-        Debug.WriteLine(datax);
+        //Debug.WriteLine(datax);
         JObject data = JObject.Parse(datax);
 
         int netId = (int)data?["networkId"];
@@ -82,21 +82,21 @@ public class DrugTest : Plugin
         }
         if (remove)
         {
-            Debug.WriteLine("Cancelled stopped ped");
+            //Debug.WriteLine("Cancelled stopped ped");
             isPlayerStoppingPed = false;
             stoppedPeds.Remove((Ped)Entity.FromNetworkId(netId));
         }
         if (isStopped && !isPlayerInTrafficStop)
         {
             if (Utilities.IsPlayerPerformingTrafficStop()) isPlayerInTrafficStop = true;
-            Debug.WriteLine("Player is now in traffic stop with ped");
+            //Debug.WriteLine("Player is now in traffic stop with ped");
             isPlayerStoppingPed = true;
             if (!stoppedPeds.Contains((Ped)Entity.FromNetworkId(netId)))
                 stoppedPeds.Add((Ped)Entity.FromNetworkId(netId));
         } else if (!isStopped && isPlayerInTrafficStop)
         {
             if (!Utilities.IsPlayerPerformingTrafficStop()) isPlayerInTrafficStop = false;
-            Debug.WriteLine("Player is no longer in traffic stop with ped");
+            //Debug.WriteLine("Player is no longer in traffic stop with ped");
             isPlayerStoppingPed = false;
             stoppedPeds.Remove((Ped)Entity.FromNetworkId(netId));
         }
@@ -109,7 +109,7 @@ public class DrugTest : Plugin
         {
             foreach (var p in stoppedPeds)
             {
-                Debug.WriteLine("Ped in stoppedPeds: "+p.Handle.ToString());
+                //Debug.WriteLine("Ped in stoppedPeds: "+p.Handle.ToString());
             }
         }
 
@@ -123,47 +123,47 @@ public class DrugTest : Plugin
             // Control Enable
             if (!_x && Game.IsControlJustPressed(0, Control.VehicleDuck))
             {
-                Debug.WriteLine("X");
+                //Debug.WriteLine("X");
                 _x = true;
             } else
             if (_x && !_down1 && Game.IsControlJustPressed(0, Control.FrontendDown) || _x && !_down1 && Game.IsControlJustPressed(0,Control.WeaponWheelNext))
             {
-                Debug.WriteLine("Down 1");
+                //Debug.WriteLine("Down 1");
                 _down1 = true;
             } else
             if (_down1 && !_down2 && Game.IsControlJustPressed(0, Control.FrontendDown) || _down1 && !_down2 && Game.IsControlJustPressed(0,Control.WeaponWheelNext))
             {
-                Debug.WriteLine("Down 2");
+                //Debug.WriteLine("Down 2");
                 _down2 = true;
             } else
             if (_down2 && !_down3 && Game.IsControlJustPressed(0, Control.FrontendDown) || _down2 && !_down3 && Game.IsControlJustPressed(0, Control.WeaponWheelNext))
             {
-                Debug.WriteLine("Down 3");
+                //Debug.WriteLine("Down 3");
                 _down3 = true;
             } else
             if (_down3 && !_down4 && Game.IsControlJustPressed(0, Control.FrontendDown) || _down3 && !_down4 && Game.IsControlJustPressed(0,Control.WeaponWheelNext))
             {
-                Debug.WriteLine("Down 4");
+                //Debug.WriteLine("Down 4");
                 _down4 = true;
             } else if (_down4 && !_down5 && !_right && Game.IsControlJustPressed(0, Control.FrontendRight))
             {
-                Debug.WriteLine("Right");
+                //Debug.WriteLine("Right");
                 _right = true;
             } else if (_down4 && !_down5 && Game.IsControlJustPressed(0, Control.FrontendDown))
             {
-                Debug.WriteLine("Down 5");
+                //Debug.WriteLine("Down 5");
                 _down5 = true;
             } else if (_down5 && !_down6 && Game.IsControlJustPressed(0, Control.FrontendDown))
             {
-                Debug.WriteLine("Down 6");
+                //Debug.WriteLine("Down 6");
                 _down6 = true;
             } else if (_down6 && !_down7 && Game.IsControlJustPressed(0, Control.FrontendDown))
             {
-                Debug.WriteLine("Down 7");
+                //Debug.WriteLine("Down 7");
                 _down7 = true;
             } else if (_down7 && Game.IsControlJustPressed(0, Control.FrontendDown))
             {
-                Debug.WriteLine("Back to top");
+                //Debug.WriteLine("Back to top");
                 _down7 = false;
                 _down6 = false;
                 _down5 = false;
@@ -180,12 +180,12 @@ public class DrugTest : Plugin
                 _down5 = true;
                 _down6 = true;
                 _down7 = true;
-                Debug.WriteLine("Back to bottom");
+                //Debug.WriteLine("Back to bottom");
             }
             // Control Disable
             else if (_x && Game.IsControlJustPressed(0, Control.FrontendCancel) || _x && Game.IsControlJustPressed(0, Control.VehicleDuck))
             {
-                Debug.WriteLine("Menu close");
+                //Debug.WriteLine("Menu close");
                 _x = false;
             } else
             if (Game.IsControlJustPressed(0, Control.FrontendUp) || Game.IsControlJustPressed(0,Control.WeaponWheelPrev))
@@ -195,42 +195,42 @@ public class DrugTest : Plugin
                     if (_down1 && _down2 && _down3 && _down4 && _down5 && _down6 && _down7)
                     {
                         _down7 = false;
-                        Debug.WriteLine("Up to down6");
+                        //Debug.WriteLine("Up to down6");
                     }
                     
                     else if (_down1 && _down2 && _down3 && _down4 && _down5 && _down6 && !_down7)
                     {
                         _down6 = false;
-                        Debug.WriteLine("Up to down5");
+                        //Debug.WriteLine("Up to down5");
                     }
                     
                     else if (_down1 && _down2 && _down3 && _down4 && _down5 && !_down6 && !_down7)
                     {
                         _down5 = false;
-                        Debug.WriteLine("Up to down4");
+                        //Debug.WriteLine("Up to down4");
                     }
                     
                     else if (_down1 && _down2 && _down3 && _down4)
                     {
                         _down4 = false;
-                        Debug.WriteLine("Up to down3");
+                        //Debug.WriteLine("Up to down3");
                     }
 
                     else if (_down1 && _down2 && _down3 && !_down4)
                     {
-                        Debug.WriteLine("Up to down2");
+                        //Debug.WriteLine("Up to down2");
                         _down3 = false;
                     }
 
                     else if (_down1 && _down2 && !_down3)
                     {
-                        Debug.WriteLine("Up to down");
+                        //Debug.WriteLine("Up to down");
                         _down2 = false;
                     }
 
                     else if (_down1 && !_down2)
                     {
-                        Debug.WriteLine("Undo down1");
+                        //Debug.WriteLine("Undo down1");
                         _down1 = false;
                     }
                 }
@@ -238,7 +238,7 @@ public class DrugTest : Plugin
             {
                 if (_right && _down4)
                 {
-                    Debug.WriteLine("Back to ped search");
+                    //Debug.WriteLine("Back to ped search");
                     _right = false;
                 }
             } /*else if (_down7 && Game.IsControlJustPressed(0, Control.SkipCutscene))
@@ -259,7 +259,7 @@ public class DrugTest : Plugin
 
                 if (!_right) // Ped Search Initiates
                 {
-                    Debug.WriteLine("Ped Search");
+                    //Debug.WriteLine("Ped Search");
                     Ped ped = null;
                     if (isPlayerInTrafficStop)
                     {
@@ -270,7 +270,7 @@ public class DrugTest : Plugin
                     }
                     
                     PedData data = await ped.GetData();
-                    Debug.WriteLine("After getdata");
+                    //Debug.WriteLine("After getdata");
                     List<Item> items = data.Items;
                     foreach (var item in items)
                     {
@@ -278,7 +278,7 @@ public class DrugTest : Plugin
                         // Grab items.json and find entry for [name]
                         // Check if isSuspicious and get drugReagent
                         bool isSuspicious = IsItemSuspicious(name); // Change to value in items.json
-                        Debug.WriteLine(name+" || isSuspicious: "+isSuspicious.ToString());
+                        //Debug.WriteLine(name+" || isSuspicious: "+isSuspicious.ToString());
                         if (isSuspicious)
                         {
                             collectedItems.Add(item);
@@ -297,7 +297,7 @@ public class DrugTest : Plugin
                 }
                 else // Vehicle Search Initiates
                 {
-                    Debug.WriteLine("Vehicle search");
+                    //Debug.WriteLine("Vehicle search");
                     Vehicle vehicle;
                     if (Utilities.IsPlayerPerformingTrafficStop())
                         vehicle = Utilities.GetVehicleFromTrafficStop();
@@ -311,7 +311,7 @@ public class DrugTest : Plugin
                         // Grab items.json and find entry for [name]
                         // Check if isSuspicious and get drugReagent
                         bool isSuspicious = IsItemSuspicious(name); // Change to value in items.json
-                        Debug.WriteLine(name+" || isSuspicious: "+isSuspicious.ToString());
+                        //Debug.WriteLine(name+" || isSuspicious: "+isSuspicious.ToString());
                         if (isSuspicious)
                         {
                             collectedItems.Add(item);
@@ -382,7 +382,7 @@ public class DrugTest : Plugin
     {
         collectedItems.Clear();
         DrugMenu._menu.ClearMenuItems();
-        Debug.WriteLine("Should have removed all items");
+        //Debug.WriteLine("Should have removed all items");
     }
 }
 
@@ -497,24 +497,30 @@ public class DrugMenu : BaseScript
 
     private async void OnMenuItemSelect(Menu menu, MenuItem menuItem, int index)
     {
-        Debug.WriteLine(menu.MenuTitle.ToString());
+        //Debug.WriteLine(menu.MenuTitle.ToString());
         if (menu == _menu)
         {
-            currentItem = menuItem;
+            if (currentItem != menuItem)
+            {
+                currentItem = menuItem;
+                foreach (MenuItem item in testkits.GetMenuItems())
+                {
+                    item.Enabled = true;
+                }
+            }
         }
         if (menu == testkits)
         {
             string itemName = currentItem.ItemData;
             string drugType = GetDrugType(itemName);
             string reagent = GetDrugReagent(drugType);
-            
-            Debug.WriteLine("Reagent: "+reagent);
+            menuItem.Enabled = false;
+            //Debug.WriteLine("Reagent: "+reagent);
             API.TaskPlayAnim(Game.PlayerPed.Handle, "mini@repair",
                 "fixing_a_player", 4f, 4f, 5000, 1, 1f, false, false, false);
             //API.TaskStartScenarioAtPosition(Game.PlayerPed.Handle,"PROP_HUMAN_BUM_BIN",Game.PlayerPed.Position.X,Game.PlayerPed.Position.Y,Game.PlayerPed.Position.Z,Game.PlayerPed.Heading,1000,false,false);
             await Delay(3000);
             ShowTestResults(itemName, reagent,menuItem.Text,menuItem.ItemData);
-            menuItem.Enabled = false;
         }
     }
 
