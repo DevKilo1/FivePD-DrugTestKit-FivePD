@@ -1,6 +1,6 @@
 ﻿This plugin may be buggy, I made it years ago.
 
-Installation: Drag and stop the provided DLL into your `fivepd/plugins` folder!
+Installation: Drag and stop the provided DLL into your `fivepd/plugins` folder! **Make sure to add the following line** to the files list of your fxmanifest.lua: `'./config/items.json',`
 
 How to use: The default keybind is "H". Open your trunk and press it!
 
