@@ -6,8 +6,8 @@
         <Nullable>disable</Nullable>
         <LangVersion>latest</LangVersion>
         <AutoGenerateBindingRedirects>False</AutoGenerateBindingRedirects>
-        <AssemblyName>$(MSBuildProjectName).net</AssemblyName>
-        <RootNamespace>FivePD-DrugTestKit-Jeremiah</RootNamespace>
+        <AssemblyName>DrugTestByKilo.net</AssemblyName>
+        <RootNamespace>DrugTestKitByKilo</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

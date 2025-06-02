@@ -10,3 +10,4 @@ Setup process: Must modify your items.json to contain the following properties f
 
 # Best use case:
 - Items that might appear suspicious on the outside such as "opaque white baggie" should be marked as suspicious, even though they may not contain drugs.
+- If you set 'isIllegal' to true as well, FivePD will show you observations like if the ped is nervous. 

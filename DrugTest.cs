@@ -37,11 +37,13 @@ public class DrugTest : Plugin
     internal DrugTest()
     {
         // Startup
-        //Debug.WriteLine("Loaded DrugTest 1.0 by DevKilo");
+        
         EventHandlers["FIVEPD::Client::changePedState"] += changePedState;
         // Post-Startup
         Events.OnDutyStatusChange += EventsOnOnDutyStatusChange;
         CheckForSearch();
+        
+        Debug.WriteLine("^2Loaded Drug Test Kit 1.0 by ^3DevKilo^0");
     }
 
     private Task EventsOnOnDutyStatusChange(bool onduty)
