@@ -1,4 +1,6 @@
-﻿Installation: Drag and stop the provided DLL into your `fivepd/plugins` folder!
+﻿This plugin may be buggy, I made it years ago.
+
+Installation: Drag and stop the provided DLL into your `fivepd/plugins` folder!
 
 How to use: The default keybind is "H". Open your trunk and press it!
 
