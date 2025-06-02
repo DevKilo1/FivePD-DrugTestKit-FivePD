@@ -130,17 +130,31 @@ public class DrugTest : Plugin
         }
     }
 
+        JObject LangConfig;
     private async void CheckForSearch()
     {
+        LangConfig = JObject.Parse(API.LoadResourceFile("fivepd", "languages/en.json") ?? "{}") ?? new JObject();
+        
+        
+        var searchButtonName = "Search";
+        if (LangConfig.TryGetValue("search", out var searchName))
+            searchButtonName = (string)searchName;
+        
+        var pedStopMenuName = "Ped stop menu";
 
-        var pedStopmenu = MenuController.Menus.FirstOrDefault(menu => menu.MenuTitle == "Ped stop menu");
+        if (LangConfig.TryGetValue("PedCheckMenu", out var pedStop))
+        {
+            pedStopMenuName = (string)pedStop["title"];
+        }
+
+        var pedStopmenu = MenuController.Menus.FirstOrDefault(menu => menu.MenuTitle == pedStopMenuName);
         if (pedStopmenu is null)
         {
             Debug.WriteLine("Failed to get Ped stop menu!");
             return;
         }
         
-        MenuListItem searchButton = (MenuListItem)pedStopmenu.GetMenuItems().FirstOrDefault(i => i.Text == "Search");
+        MenuListItem searchButton = (MenuListItem)pedStopmenu.GetMenuItems().FirstOrDefault(i => i.Text == searchButtonName);
         searchButton.ParentMenu.OnListItemSelect += async (menu, item, index, itemIndex) =>
         {
             if (item == searchButton)
@@ -400,7 +414,23 @@ public class DrugTest : Plugin
 
     private async void OnSearchButton(string searchType)
     {
-        if (searchType == "Ped") // Ped Search Initiates
+        var searchTypes = new JArray() { "Ped", "Vehicle" };
+
+        if (LangConfig is not null)
+        {
+            if (LangConfig.TryGetValue("PedCheckMenu", out var pedStopMenu))
+            {
+                if (((JObject)pedStopMenu).TryGetValue("search", out var search))
+                {
+                    if (((JObject)search).TryGetValue("types", out var _types))
+                    {
+                        searchTypes = (JArray)_types;
+                    }
+                }
+            }
+        }
+        
+        if (searchType == (string)searchTypes[0]) // Ped Search Initiates
         {
             Ped closestPed = await GetClosestStoppedPed();
             if (closestPed.IsInVehicle()) return;
